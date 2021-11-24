@@ -1,7 +1,8 @@
 class Thermostat {
   constructor() {
-    this.temperature = 20;
-    this.powerSaver = true
+    this.temperatureDefault = 20;
+    this.temperature = this.temperatureDefault;
+    this.powerSaver = true;
   }
 
   getTemperature = () => this.temperature;
@@ -27,6 +28,18 @@ class Thermostat {
   };
 
   setPowerSavingMode = (powerBool) => this.powerSaver = powerBool;
+
+  reset = () => this.temperature = this.temperatureDefault;
+
+  getUsage = () => {
+    if (this.temperature < 18) {
+      return "low-usage";
+    } else if (this.temperature > 25) {
+      return "high-usage";
+    } else {
+      return "medium-usage";
+    };
+  };
 
 };
 

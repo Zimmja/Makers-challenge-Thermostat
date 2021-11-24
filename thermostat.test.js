@@ -7,11 +7,45 @@ describe(".getTemperature", () => {
   });
 });
 
+describe(".reset", () => {
+  it('returns the temperature to the default value', () => {
+    let testStat = new Thermostat;
+    for (let i = 1; i < 10; i++ ) {
+      testStat.up()
+    };
+    expect(testStat.getTemperature()).toBeGreaterThan(20);
+    testStat.reset()
+    expect(testStat.getTemperature()).toBe(20);
+  });
+});
+
+describe(".getUsage", () => {
+  let testStat = new Thermostat;
+  it('returns low-usage below 18 degrees', () => {
+    for (let i = 1; i < 50; i++ ) {
+      testStat.down();
+    };
+    expect(testStat.getUsage()).toEqual("low-usage");
+  });
+  it('returns high-usage above 25 degrees', () => {
+    testStat.setPowerSavingMode(false)
+    for (let i = 1; i < 50; i++ ) {
+      testStat.up();
+    };
+    expect(testStat.getUsage()).toEqual("high-usage");
+  });
+  it('returns medium-usage from 18 to 25 degrees', () => {
+    testStat.reset();
+    expect(testStat.getUsage()).toEqual("medium-usage");
+  });
+});
+
+
 describe(".up", () => {
   it('increases the temperature', () => {
     let testStat = new Thermostat;
     for (let i = 1; i < 3; i++ ) {
-      testStat.up()
+      testStat.up();
       expect(testStat.getTemperature()).toBe(20 + i);
     };
   });
@@ -20,7 +54,7 @@ describe(".up", () => {
     let testStat = new Thermostat;
     testStat.setPowerSavingMode(true)
     for (let i = 1; i < 50; i++ ) {
-      testStat.up()
+      testStat.up();
     };
     expect(testStat.getTemperature()).toBe(25);
   });
@@ -46,7 +80,7 @@ describe(".down", () => {
   it('cannot decrease the temperature below the minimum of 10', () => {
     let testStat = new Thermostat;
     for (let i = 1; i < 50; i++ ) {
-      testStat.down()
+      testStat.down();
     };
     expect(testStat.getTemperature()).toBe(10);
   });
