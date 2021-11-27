@@ -26,6 +26,8 @@ const cities = [
   "Cardiff",
   "Rome",
   "Yakutsk",
+  "Anadyr",
+  "Gibraltar",
 ];
 cities.forEach((city) => {
   fetchWeatherInfo(
