@@ -1,5 +1,5 @@
 const { default: got } = require("got/dist/source");
-const openWeatherAPI = process.env.API_OPEN_WEATHER;
+const openWeatherAPI = require("./api.js");
 
 class Weather {
   fetchWeatherData = (city, callback) => {

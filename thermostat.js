@@ -1,26 +1,23 @@
 const Weather = require("./weatherReport");
 
 class Thermostat {
-  constructor(weather) {
+  constructor(weather = new Weather()) {
     this.weather = weather;
-    this.city = null;
     this.temperatureDefault = 20;
     this.temperature = this.temperatureDefault;
     this.powerSaver = true;
   }
 
-  getTemperature = () => {
-    if (this.city != null) {
+  getTemperature = (city = null) => {
+    if (city != null) {
       let weather = this.weather;
-      weather.fetchWeatherData(
-        this.city,
-        (report) => (this.temperature = report.main.temp)
-      );
+      weather.fetchWeatherData(city, (report) => {
+        console.log(report.main.temp);
+      });
+    } else {
+      return this.temperature;
     }
-    return this.temperature;
   };
-
-  setCity = (city) => (this.city = city);
 
   up = () => {
     if (this.temperature < this.maxtemp()) {
@@ -58,9 +55,3 @@ class Thermostat {
 }
 
 module.exports = Thermostat;
-
-// const weather = new Weather();
-// const thermostat = new Thermostat(weather);
-// thermostat.setCity("London");
-// console.log(thermostat.city);
-// console.log(thermostat.getTemperature());
