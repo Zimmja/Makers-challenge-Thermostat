@@ -39,6 +39,6 @@ Just for fun, I added the capability to quickly get the temperature of several c
 
 ## Technologies
 
-- JavaScript
 - Node
 - Jest
+- readline-sync
